@@ -5,15 +5,16 @@ import axios from "axios";
 const PokemonProvider = (props) => {
   const [pokemonData, setPokemonData] = useState([]);
   const [skip, setSkip] = useState(0);
-  const [limit, setLimit] = useState(20);
 
   const loadMoreData = async () => {
     const response = await axios.get(
-      `${process.env.REACT_APP_SERVER_DOMAIN}/pokemon/rate-limit?limit=${limit}&skip=${skip}`
+      `${
+        process.env.REACT_APP_SERVER_DOMAIN
+      }/pokemon/rate-limit?limit=${20}&skip=${skip}`
     );
 
     setPokemonData([...pokemonData, ...response.data.data]);
-    setSkip(skip + limit);
+    setSkip(skip + 20);
   };
 
   useEffect(() => {
@@ -24,7 +25,6 @@ const PokemonProvider = (props) => {
   const contextValue = {
     pokemonData,
     loadMoreData,
-    setLimit,
   };
   return (
     <PokemonContext.Provider value={contextValue}>
