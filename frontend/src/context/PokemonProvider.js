@@ -7,14 +7,18 @@ const PokemonProvider = (props) => {
   const [skip, setSkip] = useState(0);
 
   const loadMoreData = async () => {
-    const response = await axios.get(
-      `${
-        process.env.REACT_APP_SERVER_DOMAIN
-      }/pokemon/rate-limit?limit=${20}&skip=${skip}`
-    );
+    try {
+      const response = await axios.get(
+        `${
+          process.env.REACT_APP_SERVER_DOMAIN
+        }/pokemon/rate-limit?limit=${20}&skip=${skip}`
+      );
 
-    setPokemonData([...pokemonData, ...response.data.data]);
-    setSkip(skip + 20);
+      setPokemonData([...pokemonData, ...response.data.data]);
+      setSkip(skip + 20);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
