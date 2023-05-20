@@ -5,6 +5,7 @@ import axios from "axios";
 const PokemonProvider = (props) => {
   const [pokemonData, setPokemonData] = useState([]);
   const [skip, setSkip] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   const [apiURL, setApiURL] = useState("https://pokemon-643w.onrender.com");
 
   const loadMoreData = async () => {
