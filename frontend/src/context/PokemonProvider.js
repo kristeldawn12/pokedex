@@ -5,13 +5,19 @@ import axios from "axios";
 const PokemonProvider = (props) => {
   const [pokemonData, setPokemonData] = useState([]);
   const [skip, setSkip] = useState(0);
+  const [apiURL, setApiURL] = useState("https://pokemon-643w.onrender.com/");
 
   const loadMoreData = async () => {
     try {
       const response = await axios.get(
-        `${
-          process.env.REACT_APP_SERVER_DOMAIN
-        }/pokemon/rate-limit?limit=${20}&skip=${skip}`
+        // local server
+        // `${
+        //   process.env.REACT_APP_SERVER_DOMAIN
+        // }/pokemon/rate-limit?limit=${20}&skip=${skip}`
+
+        // deployed render server
+
+        `${apiURL}/pokemon/rate-limit?limit=${20}&skip=${skip}`
       );
 
       setPokemonData([...pokemonData, ...response.data.data]);

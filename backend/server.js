@@ -12,10 +12,6 @@ connectDB();
 
 const app = express();
 
-const corsOptions = {
-  origin: "https://fullstack-pokemon.netlify.app/pokedex",
-};
-
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Allow-Control-Allow-Methods", "GET, POST, PUT, DELETE");
@@ -24,7 +20,7 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(helmet());
 
 app.use("/", require("./routes/pokemonRoutes"));
